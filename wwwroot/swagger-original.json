@@ -1,0 +1,164 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Script Generator",
+    "description" : "To get the template, product, and raw data from the database",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:5000/",
+    "description" : "API services for Script Generator."
+  } ],
+  "paths" : {
+    "/api/v1/template" : {
+      "get" : {
+        "tags" : [ "template details" ],
+        "summary" : "Get the details for template",
+        "description" : "Get the template",
+        "operationId" : "TemplateDetails",
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/snippet-group" : {
+      "get" : {
+        "tags" : [ "snippet group name" ],
+        "summary" : "Get the details for snippet",
+        "description" : "Get the snippet details from the database",
+        "operationId" : "SnippetDetails",
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sosv-setup" : {
+      "get" : {
+        "tags" : [ "sosv setup data" ],
+        "summary" : "Get the sosv setup data",
+        "description" : "Get the sosv setup data from the database",
+        "operationId" : "sosvsetupDetails",
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/create-template" : {
+      "post" : {
+        "tags" : [ "create script" ],
+        "summary" : "Add a new template",
+        "description" : "Add a new template to the database",
+        "operationId" : "AddTemplate",
+        "requestBody" : {
+          "description" : "Template data to be added",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/v1_createtemplate_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Template added successfully"
+          },
+          "400" : {
+            "description" : "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "templateId" : {
+            "type" : "string"
+          },
+          "templateName" : {
+            "type" : "string"
+          }
+        },
+        "example" : {
+          "templateName" : "templateName",
+          "templateId" : "templateId"
+        }
+      },
+      "inline_response_200_1" : {
+        "type" : "object",
+        "properties" : {
+          "productId" : {
+            "type" : "string"
+          },
+          "productName" : {
+            "type" : "string"
+          }
+        },
+        "example" : {
+          "productId" : "productId",
+          "productName" : "productName"
+        }
+      },
+      "inline_response_200_2" : {
+        "type" : "object",
+        "properties" : {
+          "rawDataId" : {
+            "type" : "string"
+          },
+          "rawDataContent" : {
+            "type" : "string"
+          }
+        },
+        "example" : {
+          "rawDataContent" : "rawDataContent",
+          "rawDataId" : "rawDataId"
+        }
+      },
+      "v1_createtemplate_body" : {
+        "type" : "object",
+        "properties" : {
+          "templateId" : {
+            "type" : "string"
+          },
+          "templateName" : {
+            "type" : "string"
+          },
+          "templateContent" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}
